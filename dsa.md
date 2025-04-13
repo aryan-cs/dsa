@@ -1,3 +1,12 @@
+# Preface
+
+This manual was made by Aryan Gupta. If you see anything wrong, feel free to open a pull request & commit the fixed changes.
+
+**GitHub Repository**: https://github.com/aryan-cs/dsa
+
+## Hello, World!
+
+
 ```c++
 #include <iostream>
 using namespace std;
@@ -8,12 +17,16 @@ cout << "Hello, World! \n";
     Hello, World! 
 
 
+# Programming Foundations
+
+## Primitive Data Types
+
+The building blocks that make up programs.
+
 
 ```c++
 #include <iostream>
 using namespace std;
-
-// PRIMITIVE DATA TYPES //
 
 // Variable Declaration | 32-bit Architecture | 64-bit Architecture
 
@@ -45,47 +58,14 @@ cout << "An integer takes up " << to_string(sizeof(i))  << " bytes."<< endl;
     An integer takes up 4 bytes.
 
 
+## Pointers & The Heap
 
-```c++
-#include <iostream>
-#include <string>
-using namespace std;
-
-// STATIC ARRAYS //
-// Used to store a fixed amount of data contiguously in memory
-// Time complexity: O(1)
-// Space complexity: O(n)
-
-int integer_array[5] = { 0, 1, 2, 3, 4 };
-char character_array[4] = { 'a', 'b', 'c', 'd' };
-float float_array[3] = { -1.0, 0.0, 1.0 };
-string string_array[2] = { "Hello,", " World!" };
-
-// Notice how printing an array returns the pointer (stay tuned) to 
-// the first element of the array, rather than the array itself
-// However, it does work for char[], as
-// that is essentially what a string is
-cout << integer_array << std::endl;
-cout << character_array << std::endl;
-cout << float_array << std::endl;
-cout << string_array << std::endl;
-cout << string_array[0] << string_array[1] << std::endl;
-```
-
-    0x7f111970c110
-    abcd
-    0x7f111970c128
-    0x7f111970c140
-    Hello, World!
-
+Used to point to a location in memory. 
 
 
 ```c++
 #include <iostream>
 using namespace std;
-
-// POINTERS //
-// Used to point to data in memory for direct access
 
 // Allocates data on the heap (aka freestore) and 
 // creates a pointer in the stack pointing to that data
@@ -105,26 +85,14 @@ integer_pointer = nullptr;
     3
 
 
+## Referencing
 
-```c++
-#include <iostream>
-using namespace std;
-
-// RESIZEABLE ARRAYS (aka VECTORS) //
-
-cout << "As of 04/12/2025, these cannot be implemented in a C++ Notebook." << endl;
-```
-
-    As of 04/12/2025, these cannot be implemented in a C++ Notebook.
-
+To get the address of any data, use the & operator.
 
 
 ```c++
 #include <iostream>
 using namespace std;
-
-// REFERENCING //
-// To get the address of any data, use the & operator
 
 int some_integer = 5;
 cout << &some_integer << endl;
@@ -140,62 +108,21 @@ delete heap_double;
 heap_double = nullptr;
 ```
 
-    0x7ff20e3d5108
+    0x7f6336043148
     Notice that the address of the data on the heap is not the same as the address of the pointer.
-    0x5606461c3d30
-    0x7ff20e3d5100
+    0x558254e1b660
+    0x7f6336043140
 
 
+## Structs
 
-```c++
-#include <iostream>
-#include <unordered_map>
-#include <string>
-using namespace std;
-
-// HASH MAPS //
-// Used for quick lookups, mapping one value to another
-// Time complexity: O(1), but O(n) in the case of hash collisions
-// Space complexity: O(n)
-
-std::unordered_map<std::string, int> hash_map;
-
-hash_map["Archibald"] = 30;
-hash_map["Bartholomew"] = 25;
-hash_map["Charleston"] = 35;
-
-cout << "Archibald's age: " << hash_map["Archibald"] << endl;
-cout << "Bartholomew's age: " << hash_map["Bartholomew"] << endl;
-
-if (hash_map.find("Dawood") == hash_map.end()) {
-    std::cout << "Key 'Dawood' not found." << endl;
-}
-
-for (const auto& pair : hash_map) {
-    cout << pair.first << "'s age: " << pair.second << endl;
-}
-
-hash_map.erase("Bartholomew"); // Only Archibald and Charleston remain
-
-cout << "There are " << hash_map.size() << " elements in the hash map." << std::endl;
-```
-
-    Archibald's age: 30
-    Bartholomew's age: 25
-    Key 'Dawood' not found.
-    Charleston's age: 35
-    Bartholomew's age: 25
-    Archibald's age: 30
-    There are 2 elements in the hash map.
-
+Used to group a set of context-dependent data types.   
 
 
 ```c++
 #include <iostream>
 #include <string>
 using namespace std;
-
-// STRUCTS //
 
 struct Grouping_Structure_1 {
 
@@ -251,45 +178,192 @@ cout << group_2.member_A << endl;
     1
 
 
+## Classes
 
-```c++
-// CLASSES //
-```
+The key to object-oriented programming, builds upon the idea of a struct.
 
+*Coming soon...*
 
-```c++
-// TYPE DEFINITIONS & FUNCTION TEMPLATES //
-```
+## Type Definitions & Function Templates
 
+Useful for writing cleaner code & fixing compiler warnings.
 
-```c++
-// [SINGLY] LINKED LIST //
+*Coming soon...*
 
+# Data Structures
 
+## Static Arrays
 
-```
-
-
-```c++
-// DOUBLY LINKED LIST //
-```
+Used to store a fixed amount of data contiguously in memory.  
+**Time complexity**: O(1) read, O(1) write, O(n) search  
+**Space complexity**: O(n) 
 
 
 ```c++
-// STACK //
+#include <iostream>
+#include <string>
+using namespace std;
+
+int integer_array[5] = { 0, 1, 2, 3, 4 };
+char character_array[4] = { 'a', 'b', 'c', 'd' };
+float float_array[3] = { -1.0, 0.0, 1.0 };
+string string_array[2] = { "Hello,", " World!" };
+
+// Notice how printing an array returns the pointer (stay tuned) to 
+// the first element of the array, rather than the array itself
+// However, it does work for char[], as
+// that is essentially what a string is
+cout << integer_array << std::endl;
+cout << character_array << std::endl;
+cout << float_array << std::endl;
+cout << string_array << std::endl;
+cout << string_array[0] << string_array[1] << std::endl;
 ```
+
+    0x7f111970c110
+    abcd
+    0x7f111970c128
+    0x7f111970c140
+    Hello, World!
+
+
+## Resizable Arrays
+
+Arrays of non-fixed size.  
+**Time complexity**: O(1) read, O(1) write*, O(n) search  
+**Space complexity**: O(n) 
+
+*\* O(n) if attempting to write while at maximum capacity, as we will need to resize.*
 
 
 ```c++
-// QUEUE //
+#include <iostream>
+using namespace std;
+
+// RESIZEABLE ARRAYS (aka VECTORS) //
+
+cout << "As of 04/12/2025, these cannot be implemented in a C++ Notebook." << endl;
 ```
+
+    As of 04/12/2025, these cannot be implemented in a C++ Notebook.
+
+
+## Hash Maps
+
+Used for quick lookups, mapping one value to another.  
+**Time complexity**: O(1) read*, O(1) write*  
+**Space complexity**: O(n)  
+
+*\* O(n) if hash collisions occur, where each bucket degrades into a list.*
 
 
 ```c++
-// LRU CACHE //
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+std::unordered_map<std::string, int> hash_map;
+
+hash_map["Archibald"] = 30;
+hash_map["Bartholomew"] = 25;
+hash_map["Charleston"] = 35;
+
+cout << "Archibald's age: " << hash_map["Archibald"] << endl;
+cout << "Bartholomew's age: " << hash_map["Bartholomew"] << endl;
+
+if (hash_map.find("Dawood") == hash_map.end()) {
+    std::cout << "Key 'Dawood' not found." << endl;
+}
+
+for (const auto& pair : hash_map) {
+    cout << pair.first << "'s age: " << pair.second << endl;
+}
+
+hash_map.erase("Bartholomew"); // Only Archibald and Charleston remain
+
+cout << "There are " << hash_map.size() << " elements in the hash map." << std::endl;
 ```
 
+    Archibald's age: 30
+    Bartholomew's age: 25
+    Key 'Dawood' not found.
+    Charleston's age: 35
+    Bartholomew's age: 25
+    Archibald's age: 30
+    There are 2 elements in the hash map.
 
-```c++
-// BINARY SEARCH TREE //
-```
+
+## [Singly] Linked List
+
+*Coming soon...*
+
+## Doubly Linked List
+
+*Coming soon...*
+
+## Stack
+
+*Coming soon...*
+
+## Queue
+
+*Coming soon...*
+
+## LRU Cache
+
+*Coming soon...*
+
+## Binary Tree
+
+*Coming soon...*
+
+# Algorithms
+
+## Depth-first Search (DFS)
+
+*Coming soon...*
+
+## Breadth-first Search (BFS)
+
+*Coming soon...*
+
+## Iterative Deepening
+
+*Coming soon...*
+
+## Pre-order Traversal
+
+*Coming soon...*
+
+## In-order Traversal
+
+*Coming soon...*
+
+## Post-order Traversal
+
+*Coming soon...*
+
+## Level-order Traversal
+
+*Coming soon...*
+
+## Binary Search Algorithm
+
+*Coming soon...*
+
+## Merge Sort Algorithm
+
+*Coming soon...*
+
+## Bubble Sort Algorithm
+
+*Coming soon...*
+
+## Djikstra's Algorithm
+
+*Coming soon...*
+
+## A* Algorithm
+
+*Coming soon...*
