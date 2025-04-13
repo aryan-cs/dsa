@@ -1,10 +1,7 @@
 ```c++
 #include <iostream>
 using namespace std;
-```
 
-
-```c++
 cout << "Hello, World! \n";
 ```
 
@@ -13,6 +10,9 @@ cout << "Hello, World! \n";
 
 
 ```c++
+#include <iostream>
+using namespace std;
+
 // PRIMITIVE DATA TYPES //
 
 // Variable Declaration | 32-bit Architecture | 64-bit Architecture
@@ -47,9 +47,14 @@ cout << "An integer takes up " << to_string(sizeof(i))  << " bytes."<< endl;
 
 
 ```c++
+#include <iostream>
 #include <string>
+using namespace std;
 
 // STATIC ARRAYS //
+// Used to store a fixed amount of data contiguously in memory
+// Time complexity: O(1)
+// Space complexity: O(n)
 
 int integer_array[5] = { 0, 1, 2, 3, 4 };
 char character_array[4] = { 'a', 'b', 'c', 'd' };
@@ -64,16 +69,21 @@ cout << integer_array << std::endl;
 cout << character_array << std::endl;
 cout << float_array << std::endl;
 cout << string_array << std::endl;
+cout << string_array[0] << string_array[1] << std::endl;
 ```
 
-    0x7f059e0e58e0
+    0x7f111970c110
     abcd
-    0x7f059e0e58f8
-    0x7f059e0e5910
+    0x7f111970c128
+    0x7f111970c140
+    Hello, World!
 
 
 
 ```c++
+#include <iostream>
+using namespace std;
+
 // POINTERS //
 // Used to point to data in memory for direct access
 
@@ -97,6 +107,9 @@ integer_pointer = nullptr;
 
 
 ```c++
+#include <iostream>
+using namespace std;
+
 // RESIZEABLE ARRAYS (aka VECTORS) //
 
 cout << "As of 04/12/2025, these cannot be implemented in a C++ Notebook." << endl;
@@ -105,7 +118,11 @@ cout << "As of 04/12/2025, these cannot be implemented in a C++ Notebook." << en
     As of 04/12/2025, these cannot be implemented in a C++ Notebook.
 
 
+
 ```c++
+#include <iostream>
+using namespace std;
+
 // REFERENCING //
 // To get the address of any data, use the & operator
 
@@ -123,20 +140,133 @@ delete heap_double;
 heap_double = nullptr;
 ```
 
-    0x7f66f97ad058
+    0x7ff20e3d5108
     Notice that the address of the data on the heap is not the same as the address of the pointer.
-    0x56162fd6b710
-    0x7f66f97ad050
+    0x5606461c3d30
+    0x7ff20e3d5100
 
 
 
 ```c++
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
 // HASH MAPS //
+// Used for quick lookups, mapping one value to another
+// Time complexity: O(1), but O(n) in the case of hash collisions
+// Space complexity: O(n)
+
+std::unordered_map<std::string, int> hash_map;
+
+hash_map["Archibald"] = 30;
+hash_map["Bartholomew"] = 25;
+hash_map["Charleston"] = 35;
+
+cout << "Archibald's age: " << hash_map["Archibald"] << endl;
+cout << "Bartholomew's age: " << hash_map["Bartholomew"] << endl;
+
+if (hash_map.find("Dawood") == hash_map.end()) {
+    std::cout << "Key 'Dawood' not found." << endl;
+}
+
+for (const auto& pair : hash_map) {
+    cout << pair.first << "'s age: " << pair.second << endl;
+}
+
+hash_map.erase("Bartholomew"); // Only Archibald and Charleston remain
+
+cout << "There are " << hash_map.size() << " elements in the hash map." << std::endl;
+```
+
+    Archibald's age: 30
+    Bartholomew's age: 25
+    Key 'Dawood' not found.
+    Charleston's age: 35
+    Bartholomew's age: 25
+    Archibald's age: 30
+    There are 2 elements in the hash map.
+
+
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+// STRUCTS //
+
+struct Grouping_Structure_1 {
+
+    int member_A;
+    double member_B;
+    string member_C;
+    float member_D;
+
+    Grouping_Structure_1(int a, double b, string c, float d) : member_A{a},member_B{b}, member_C{c}, member_D{d} {}
+
+};
+
+Grouping_Structure_1 group_1(1, 100, "Hello, World!", -1.0);
+cout << group_1.member_A << endl;
+cout << group_1.member_B << endl;
+cout << group_1.member_C << endl;
+cout << group_1.member_D << endl;
+
+struct Grouping_Structure_2 {
+
+    int member_A;
+    double member_B;
+    string member_C;
+    float member_D;
+
+    // These can also be made without a constructor
+
+};
+
+Grouping_Structure_2 group_2;
+
+cout << "Without any default value, they parameters on the default value of their datatype." << endl;
+cout << group_2.member_A << endl;
+cout << group_2.member_B << endl;
+cout << group_2.member_C << endl;
+cout << group_2.member_D << endl;
+
+cout << "These values can be edited, however." << endl;
+group_2.member_A = 1;
+cout << group_2.member_A << endl;
+```
+
+    1
+    100
+    Hello, World!
+    -1
+    Without any default value, they parameters on the default value of their datatype.
+    0
+    0
+    
+    0
+    These values can be edited, however.
+    1
+
+
+
+```c++
+// CLASSES //
+```
+
+
+```c++
+// TYPE DEFINITIONS & FUNCTION TEMPLATES //
 ```
 
 
 ```c++
 // [SINGLY] LINKED LIST //
+
+
+
 ```
 
 
