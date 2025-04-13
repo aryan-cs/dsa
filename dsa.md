@@ -98,11 +98,11 @@ int some_integer = 5;
 cout << &some_integer << endl;
 
 cout << "Notice that the address of the data on the heap is not the same as the address of the pointer." << endl;
+// The pointer is some data that resides in the stack, which 
+// points to an address on the heap (where our allocated data is stored)
 double* heap_double = new double(5.0);
 cout << heap_double << endl;
 cout << &heap_double << endl;
-// The pointer is some data that resides in the stack, which 
-// points to an address on the heap (where our allocated data is stored)
 
 delete heap_double;
 heap_double = nullptr;
