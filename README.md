@@ -182,13 +182,146 @@ cout << group_2.member_A << endl;
 
 The key to object-oriented programming, builds upon the idea of a struct.
 
-*Coming soon...*
+
+```c++
+#include <iostream>
+#include <string>
+using namespace std;
+
+class MyClass {
+
+    public: // access specifier, details the scope of the following
+        int public_int; // attribute
+        void public_func() { // method
+            cout << "You can declare methods alongside attributes in the class." << endl;
+            private_func();
+        }
+        void outside_method();
+
+    private:
+        int private_int;
+        void private_func() {
+            cout << "However, private methods can only be called in the scope of the class." << endl;
+        }
+};
+
+// This is not supported in the C++ notebook, 
+// but is also a valid method for declaring methods.
+// void MyClass::outside_method() {
+//   cout << "You can also declare a method outside the class." << endl;
+// }
+
+MyClass example;
+cout << example.public_int << endl;
+example.public_int = 1;
+cout << example.public_int << endl;
+example.public_func();
+```
+
+    0
+    1
+    You can declare methods alongside attributes in the class.
+    However, private methods can only be called in the scope of the class.
+
+
+
+```c++
+// However, notice what happens when we try to access a private attribute.
+cout << example.private_int << endl;
+```
+
+    [1minput_line_21:3:17: [0m[0;1;31merror: [0m[1m'private_int' is a private member of 'MyClass'[0m
+    cout << example.private_int << endl;
+    [0;1;32m                ^
+    [0m[1minput_line_20:12:13: [0m[0;1;30mnote: [0mdeclared private here[0m
+            int private_int;
+    [0;1;32m            ^
+    [0m
+
+
+    Interpreter Error: 
+
 
 ## Type Definitions & Function Templates
 
 Useful for writing cleaner code & fixing compiler warnings.
 
-*Coming soon...*
+
+```c++
+#include <iostream>
+using namespace std;
+
+// We can redefine data types to abstract commonly used patterns
+// This doesn't change the behavior of the data type, only how much we need to type
+// This is useful when the compiler throws warnings on 
+// things such as commonly switched parameters
+typedef int triple[3];
+typedef double super_double;
+
+triple custom_triple = {0, 1, 2};
+super_double nothing_special = 1.0;
+
+cout << custom_triple[0] << custom_triple[1] << custom_triple[2] << endl;
+cout << nothing_special << endl;
+```
+
+    012
+    1
+
+
+
+```c++
+// We can also define functions without specific data types,
+// which reduces how much repetitive code we need to write
+template <typename T>
+T find_max(T a, T b) {
+    return (a > b) ? a : b;
+}
+```
+
+
+```c++
+cout << find_max(1, 2) << endl;
+cout << find_max(3.0, 4.0) << endl;
+cout << find_max('a', 'A') << endl;
+```
+
+    2
+    4
+    a
+
+
+
+```c++
+// But T is not flexible--every parameter of type T must be of the same type
+// If it isn't, we can define multiple T's
+
+template <typename T1, typename T2>
+T1 find_max(T1 x, T2 y) {
+    return (x > y) ? x : y;
+}
+```
+
+
+```c++
+cout << find_max('a', 300) << endl;
+// Notice what happens here: 
+// 1. 'a' is converted into its ASCII value, 97 
+// 2. 97 is then compared to 300
+// 3. 300 is greater than 97, so it is converted into the return type of find_max(), which is the type of variable x (char)
+// 3.5. BUT, 300 is greater than the range of ASCII, so we return 300 % 128 = 44 (there are 128 items in the ASCII table)
+// 4. 44 in ASCII is ',', so that is what we return
+```
+
+    ,
+
+
+
+
+
+    @0x7f6e7e76fd20
+
+
 
 # Data Structures
 
