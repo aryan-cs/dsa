@@ -429,11 +429,176 @@ cout << "There are " << hash_map.size() << " elements in the hash map." << std::
 
 ## [Singly] Linked List
 
-*Coming soon...*
+Similar to resizable arrays, but doesn't use 2^k memory slots (only uses k + 1 memory) when appending.  
+**Time complexity**: O(n) read, O(1) write  
+**Space complexity**: O(n)
+
+
+```c++
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+struct Node {
+    int data;  
+    Node* next; 
+};
+
+class LinkedList {
+public:
+    LinkedList() : head(nullptr) {}
+
+    ~LinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current -> next;
+            delete current;
+            current = next;
+        }
+    }
+
+    void push_front(int data) {
+        Node* newNode = new Node{data, head};
+        head = newNode;
+    }
+
+    void push_back(int data) {
+        Node* newNode = new Node{data, nullptr};
+        
+        if (head == nullptr) { head = newNode; return; }
+        
+        Node* current = head;
+        while (current -> next != nullptr) { current = current -> next; }
+        current -> next = newNode;
+    }
+
+    Node* find(int data) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current -> data == data) { return current; }
+            current = current -> next;
+        }
+        return nullptr;
+    }
+
+    void print() {
+        Node* current = head;
+        while (current) {
+            cout << current -> data << " -> ";
+            current = current -> next;
+        }
+        cout << "[nullptr]" << endl;
+    }
+
+private:
+    Node* head;
+};
+
+LinkedList myList;
+myList.push_front(1);   // 1
+myList.push_back(2);    // 1 -> 2
+myList.push_front(3);   // 3 -> 1 -> 2
+myList.push_back(4);    // 3 -> 1 -> 2 -> 4
+myList.push_front(5);   // 5 -> 3 -> 1 -> 2 -> 4
+myList.print();
+
+cout << "Element [2] located at address " << myList.find(2) << endl;
+cout << "Element [6] located at address " << myList.find(6) << endl;
+```
+
+    5 -> 3 -> 1 -> 2 -> 4 -> [nullptr]
+    Element [2] located at address 0x55acc3a0f570
+    Element [6] located at address 0
+
 
 ## Doubly Linked List
 
-*Coming soon...*
+Similar to singly linked lists, but has pointers in both directions.  
+**Time complexity**: O(n) read, O(1) write  
+**Space complexity**: O(n)
+
+
+```c++
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;  
+    Node* next; 
+    Node* prev; 
+};
+
+class DoublyLinkedList {
+public:
+    DoublyLinkedList() : head(nullptr) {}
+
+    ~DoublyLinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current -> next;
+            delete current;
+            current = next;
+        }
+    }
+
+    void push_front(int data) {
+        Node* newNode = new Node{data, head, nullptr};
+        if (head != nullptr) {
+            head -> prev = newNode;
+        }
+        head = newNode;
+    }
+
+    void push_back(int data) {
+        Node* newNode = new Node{data, nullptr, nullptr};
+        
+        if (head == nullptr) { head = newNode; return; }
+        
+        Node* current = head;
+        while (current -> next != nullptr) { current = current -> next; }
+        current -> next = newNode;
+        newNode -> prev = current;
+    }
+
+    Node* find(int data) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current -> data == data) { return current; }
+            current = current -> next;
+        }
+        return nullptr;
+    }
+
+    void print() {
+        Node* current = head;
+        while (current) {
+            cout << current -> data << " <-> ";
+            current = current -> next;
+        }
+        cout << "[nullptr]" << endl;
+    }
+
+private:
+    Node* head;
+};
+
+DoublyLinkedList myList;
+myList.push_front(1);   // 1
+myList.push_back(2);    // 1 <-> 2
+myList.push_front(3);   // 3 <-> 1 <-> 2
+myList.push_back(4);    // 3 <-> 1 <-> 2 <-> 4
+myList.push_front(5);   // 5 <-> 3 <-> 1 <-> 2 <-> 4
+myList.print();
+
+cout << "Element [2] located at address " << myList.find(2) << endl;
+cout << "Element [6] located at address " << myList.find(6) << endl;
+```
+
+    5 <-> 3 <-> 1 <-> 2 <-> 4 -> [nullptr]
+    Element [2] located at address 0x55acc15edbb0
+    Element [6] located at address 0
+
 
 ## Stack
 
