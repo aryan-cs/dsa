@@ -491,6 +491,8 @@ public:
         cout << "[nullptr]" << endl;
     }
 
+    Node* getHead() { return head; }
+
 private:
     Node* head;
 };
@@ -579,6 +581,8 @@ public:
         cout << "[nullptr]" << endl;
     }
 
+    Node* getHead() { return head; }
+
 private:
     Node* head;
 };
@@ -602,7 +606,97 @@ cout << "Element [6] located at address " << myList.find(6) << endl;
 
 ## Stack
 
-*Coming soon...*
+Remember: A stack is a data structure that implements a linked list!
+
+
+```c++
+#include <iostream>
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+struct Node {
+    int data;  
+    Node* next; 
+};
+
+class LinkedList {
+public:
+    LinkedList() : head(nullptr) {}
+
+    ~LinkedList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* next = current -> next;
+            delete current;
+            current = next;
+        }
+    }
+
+    void push_front(int data) {
+        Node* newNode = new Node{data, head};
+        head = newNode;
+    }
+
+    void push_back(int data) {
+        Node* newNode = new Node{data, nullptr};
+        
+        if (head == nullptr) { head = newNode; return; }
+        
+        Node* current = head;
+        while (current -> next != nullptr) { current = current -> next; }
+        current -> next = newNode;
+    }
+
+    Node* find(int data) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current -> data == data) { return current; }
+            current = current -> next;
+        }
+        return nullptr;
+    }
+
+    void print() {
+        Node* current = head;
+        while (current) {
+            cout << current -> data << " -> ";
+            current = current -> next;
+        }
+        cout << "[nullptr]" << endl;
+    }
+
+    Node* getHead() { return head; }
+
+private:
+    Node* head;
+};
+
+class Stack : public LinkedList {
+    public:
+    int peek() {
+        Node* current = getHead();
+
+        // Generally, we'll keep a tail pointer for faster lookup; however, this implementation doesn't currently support that!
+        while (current -> next != nullptr) { current = current -> next; }
+        return current -> data;
+    }
+};
+
+Stack stack;
+stack.push_back(1);
+stack.push_back(2);
+stack.push_back(3);
+stack.print();
+
+cout << "Element [2] located at address " << stack.find(2) << endl;
+cout << "Top element on stack is " << stack.peek() << endl;
+```
+
+    1 -> 2 -> 3 -> [nullptr]
+    Element [2] located at address 0x563fecfc0c50
+    Top element on stack is 3
+
 
 ## Queue
 
